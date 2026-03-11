@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>글로벌 모바일 게임 시즌 스킨 기획서</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  :root {
+    --bg: #09090b;
+    --card-bg: rgba(24, 24, 27, 0.7);
+    --border: rgba(255, 255, 255, 0.1);
+    --kr: #3b82f6;
+    --jp: #ec4899;
+    --us: #f59e0b;
+    --text-main: #e4e4e7;
+    --text-muted: #a1a1aa;
+    --table-header: rgba(39, 39, 42, 0.95);
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Pretendard', sans-serif;
+    background: var(--bg) radial-gradient(circle at 50% 0%, #1e1b4b, #09090b 70%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    line-height: 1.6;
+    padding-bottom: 50px;
+  }
+  .container {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeIn 1s ease-out;
+  }
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #facc15 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+  }
+  .desc {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+  }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    backdrop-filter: blur(12px);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+  th, td {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th:last-child, td:last-child {
+    border-right: none;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  th {
+    background: var(--table-header);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-size: 1.3rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .month-col {
+    width: 7%;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: #a855f7;
+    vertical-align: middle;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+  }
+  .theme-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .badge-kr { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid #3b82f6; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem; }
+  .badge-jp { background: rgba(236, 72, 153, 0.2); color: #f472b6; border: 1px solid #ec4899; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem; }
+  .badge-us { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem; }
+
+  /* 이미지 영역 스타일 강화 */
+  .img-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: #111;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .loading-text {
+    position: absolute;
+    color: #a1a1aa;
+    font-size: 0.9rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: #a855f7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+  
+  .sample-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+  }
+  .sample-img.loaded {
+    opacity: 1;
+  }
+  .img-wrapper:hover .sample-img {
+    transform: scale(1.08);
+  }
+  .img-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 10px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.9);
+    text-align: right;
+    pointer-events: none;
+    z-index: 3;
+    font-weight: bold;
+  }
+
+  .content-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+  .content-list li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    min-width: 48px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .t-base { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; }
+  .t-name { background: linear-gradient(135deg, #059669, #047857); color: #fff; }
+  .t-frame { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff; }
+  .t-march { background: linear-gradient(135deg, #d97706, #b45309); color: #fff; }
+
+  .point-box {
+    background: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    padding: 16px;
+    border-left: 4px solid #a855f7;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .point-row {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .point-row:last-child {
+    margin-bottom: 0;
+  }
+  .hl-vk { color: #f472b6; font-weight: 800; background: rgba(244, 114, 182, 0.1); padding: 2px 6px; border-radius: 4px; }
+  .hl-vfx { color: #38bdf8; font-weight: 800; background: rgba(56, 189, 248, 0.1); padding: 2px 6px; border-radius: 4px; }
+
+  .summary {
+    position: relative;
+    margin-top: 60px;
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(88,28,135,0.85) 0%, rgba(157,23,77,0.85) 100%);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+    animation: slideUp 0.8s ease-out;
+    overflow: hidden;
+  }
+  .summary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+    pointer-events: none;
+  }
+  .summary h2 {
+    margin: 0 0 15px 0;
+    color: #fff;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .summary p {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fbcfe8;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>글로벌 모바일 게임 시즌 스킨 기획서</h1>
+    <div class="desc">한국 🇰🇷 · 일본 🇯🇵 · 미국 🇺🇸 시장을 타겟팅한 1~12월 시즌 스킨 매트릭스 (AI 샘플 이미지 포함)</div>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>월 (Month)</th>
+        <th style="width: 31%;">🇰🇷 한국 (Korea)</th>
+        <th style="width: 31%;">🇯🇵 일본 (Japan)</th>
+        <th style="width: 31%;">🇺🇸 미국 (US)</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <!-- Content Generated by JS -->
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h2>✨ 핵심 컨셉 요약</h2>
+    <p>"각 국가의 문화적 공감대를 자극하는 트렌디한 시각적 번역으로 글로벌 유저의 소유욕을 극대화하라!"</p>
+  </div>
+</div>
+
+<script>
+  const data = [
+    {
+      month: 1,
+      kr: { theme: "🌟 설날: 까치와 복주머니", b: "전통 기와집 텍스처, 처마 끝 청사초롱 점등", n: "단청 문양 배경, '복(福)' 한자 심볼", f: "금실로 수놓은 비단 테두리와 까치 비행 애니메이션", m: "전통 가마 이동 잔상, 엽전 흩날림 깃발", vk: "오방색, 전통, 풍요", vfx: "황금빛 엽전 파티클, 은은한 등불 스와이프", p: "isometric+mobile+game+base+korean+traditional+hanok+roof+lunar+new+year+colorful+lanterns+3d+game+art" },
+      jp: { theme: "🌟 오쇼가츠: 카도마츠 신사", b: "토리이 출입구, 카도마츠 장식 및 타종 이펙트", n: "접이식 부채 배경, 벚꽃 심볼", f: "시메나와(금줄) 테두리 진동 애니메이션", m: "여우 가면 부대 잔상, 부적(오마모리) 깃발", vk: "신성함, 기원, 일본풍", vfx: "신비로운 연기(스모크), 벚꽃잎 낙하", p: "isometric+mobile+game+base+japanese+shinto+shrine+torii+gate+new+year+decor+shimenawa+3d+game+art" },
+      us: { theme: "🌟 타임스퀘어 단독 파티", b: "네온사인 빌보드, 미러볼 카운트다운 드랍 이펙트", n: "화려한 80s 네온사인 폰트, 폭죽 심볼", f: "카운트다운 시계 테두리 회전 이펙트", m: "리무진 이동 잔상, 반짝이는 스파클러 깃발", vk: "파티, 화려함, 네온", vfx: "글리터 스파클, 색종이(컨페티) 팡파르", p: "isometric+mobile+game+base+times+square+new+year+party+neon+lights+glowing+disco+ball+fireworks+3d" }
+    },
+    {
+      month: 2,
+      kr: { theme: "🍫 달콤한 발렌타인", b: "오버사이즈 초콜릿 성상, 딸기 시럽이 흐르는 외벽", n: "판초콜릿 패턴, 하트 날개 심볼", f: "초콜릿 퐁듀가 흘러내리는 테두리 애니메이션", m: "하트모양 마차 잔상, 큐피드 화살 깃발", vk: "스위트, 핑크, 로맨틱", vfx: "러브 하트 팝핑, 시럽 멜팅 텍스처", p: "isometric+mobile+game+base+giant+chocolate+castle+strawberry+syrup+dripping+pink+sweet+valentine+theme+3d" },
+      jp: { theme: "❄️ 삿포로 눈축제 페스타", b: "정교한 얼음 조각 성벽, 이글루 형태 관저", n: "서리 낀 유리 질감, 눈송이 심볼", f: "얼음 결정(크리스탈) 자라나는 애니메이션", m: "눈썰매 보드 잔상, 펭귄 모티브 깃발", vk: "투명함, 크리스탈, 겨울축제", vfx: "주변 공기 서리화(Frost) 이펙트, 은은한 입김 발생", p: "isometric+mobile+game+base+sapporo+snow+festival+intricate+ice+sculpture+castle+glowing+blue+ice+3d+frozen" },
+      us: { theme: "🏈 슈퍼볼 위크엔드 매니아", b: "그리디언트(Gridiron) 코트 질감 기지, 대형 전광판 팝업", n: "가죽 풋볼 질감 배경, MVP 텍스트 심볼", f: "스타디움 서치라이트 교차 애니", m: "태클 돌진 잔상, 폼 핑거 깃발", vk: "스포티, 열광, 스타디움", vfx: "서치라이트 빙글빙글 스윕, 함성 파장", p: "isometric+mobile+game+base+american+football+stadium+style+base+giant+jumbotron+searchlights+shining+3d" }
+    },
+    {
+      month: 3,
+      kr: { theme: "🎒 두근두근 새학기 등교", b: "봄날의 모던형 학교 캠퍼스, 노란 셔틀버스 정차", n: "초록색 칠판 텍스처 배경, 분필 글씨 심볼", f: "개나리꽃 화관이 가장자리를 도는 프레임", m: "두발자전거 이동 잔상, 옐로우 백팩 깃발", vk: "설렘, 개나리빛, 영(Young)", vfx: "따스한 햇살 렌즈 플레어, 분필 가루 흩날림", p: "isometric+mobile+game+base+modern+high+school+campus+in+spring+season+yellow+school+bus+forsythia+flowers" },
+      jp: { theme: "🌸 밤벚꽃 하나미 축제", b: "거대한 만개 벚나무가 기지를 덮고 핑크빛 초롱 야간 점등", n: "핑크 그라데이션, 떨어지는 벚꽃잎 심볼", f: "벚꽃 가지가 살랑이며 꽃잎들이 흩날리는 테두리", m: "벚꽃 회오리 잔상, 단풍 깃발", vk: "흩날림, 핑크 나이트, 낭만풍", vfx: "상시 벚꽃 낙하 파티클, 바람결 이펙트", p: "isometric+mobile+game+base+giant+cherry+blossom+tree+blooming+at+night+illuminated+by+pink+paper+lanterns" },
+      us: { theme: "🍀 세인트 패트릭 럭키 펍", b: "거대한 다크그린 아일랜드 펍, 지붕 끝에 무지개와 황금 단지", n: "세잎 클로버 패턴 배경, 행운의 요정 마크", f: "황금 동전이 굴러다니는 애니메이션", m: "초록 연막탄 전진, 레프러콘 톱햇 깃발", vk: "딥그린, 행운, 골드 코인", vfx: "황금빛 코인 분수 팝, 무지개 잔상 궤적", p: "isometric+mobile+game+base+dark+green+irish+pub+magic+rainbow+ending+in+a+pot+of+gold+st+patricks+day" }
+    },
+    {
+      month: 4,
+      kr: { theme: "🌳 생명의 식목일 포레스트", b: "거대한 신목(고목나무) 아래 지어진 베이스캠프", n: "초록빛 이끼 배경, 돋아나는 떡잎 심볼", f: "빛의 나비들이 원형을 그리며 나는 효과", m: "걸음마다 묘목 자라나는 잔상, 도토리 깃발", vk: "에코, 힐링, 생명력 베이스", vfx: "초록빛 치유의 빛 줄기, 반딧불이 반짝임", p: "isometric+mobile+game+base+built+around+a+massive+ancient+magic+tree+glowing+green+leaves+healing+light" },
+      jp: { theme: "🚄 골든위크 기차 여행", b: "도쿄역 모티브 붉은 벽돌 건물, 거대 여행용 트렁크 장식", n: "여권 스탬프 용지 배경, 비행기 실루엣", f: "장난감 태엽 기차가 순회하는 애니메이션", m: "신칸센 쾌속 잔상, 가이드 깃발", vk: "여행, 스팀펑크 레일, 플랫폼", vfx: "바퀴 마찰 스파크, 하얀 증기 배출 파티클", p: "isometric+mobile+game+base+classic+red+brick+train+station+giant+vintage+luggage+golden+week+travel+railway" },
+      us: { theme: "🐰 파스텔 이스터 에그 헌트", b: "파스텔톤 체크무늬 지붕, 풀숲에 숨겨진 자이언트 에그", n: "부활절 달걀 패턴 배경, 깡총거리는 토끼", f: "데이지 꽃과 파스텔 리본이 물결치는 애니", m: "통통 튀는 이동 연출, 당근 깃발", vk: "파스텔 톤업, 큐트, 바스켓", vfx: "에그 크래킨 팝핑 효과, 솜털 스월링", p: "isometric+mobile+game+base+pastel+colored+cute+cottage+giant+easter+eggs+hidden+in+grass+bunny+ears+3d" }
+    },
+    {
+      month: 5,
+      kr: { theme: "🎢 테마파크 칠드런스 데이", b: "거대 장난감 블록 조립 캐슬, 작동하는 회전관람차", n: "레고풍 닉네임, 알록달록 헬륨 풍선 번들", f: "빙글빙글 도는 장난감 톱니바퀴 프레임", m: "장난감 태엽 자동차 잔상, 피에로 모자 플래그", vk: "토이, 비비드 풀컬러, 액티브", vfx: "비누방울 몽글몽글 발생, 태엽 스월", p: "isometric+mobile+game+base+giant+toy+block+castle+theme+park+ferris+wheel+vivid+colorful+children+day" },
+      jp: { theme: "🎏 천공의 코이노보리 페스타", b: "일본풍 목조 저택 옥상 바람 타는 대형 잉어 연출", n: "푸른 물결 패턴 배경, 금빛 잉어 비늘", f: "바람에 펄럭이는 잉어 꼬리 지느러미 테두리", m: "물보라 서핑 잔상, 사무라이 투구 깃발", vk: "바람, 푸른 파도, 잉어 연", vfx: "바람을 가르는 윈드 파티클, 물방울 튀김", p: "isometric+mobile+game+base+japanese+wooden+mansion+flying+giant+koinobori+carp+streamers+summer+sky" },
+      us: { theme: "🪅 싱코 데 마요 라틴 피에스타", b: "오색 피냐타 형태 기지, 테킬라 오크통 바리케이드", n: "멕시칸 담요 패턴, 흔들리는 솜브레로", f: "피냐타 종이 조각이 떨어지는 프레임", m: "라틴 댄스 스텝 연출 잔상, 멕시칸 판초 깃발", vk: "카니발 축제, 오렌지/레드, 핫바이브", vfx: "마라카스 브라스 뮤직 이펙트 선, 색종이 폭죽 스파클", p: "isometric+mobile+game+base+giant+colorful+pinata+building+cinco+de+mayo+festival+festive+mexican+flags" }
+    },
+    {
+      month: 6,
+      kr: { theme: "🎖️ K-아미 호국보훈 위장기지", b: "K-밀리터리 최첨단 카모플라쥬 도색, 회전 레이더망", n: "빛바랜 군번줄 소재, 무궁화와 태극문양", f: "저격총 스코프 타겟팅 HUD 애니메이션", m: "전술기동 잔상 궤적, K-아미 부대마크 플래그", vk: "그리드, 솔리드 메탈, 전술기동", vfx: "야간 투시경 그린 글로우 효과, 레이더 스캐닝 파장", p: "isometric+mobile+game+base+advanced+military+camouflage+bunker+spinning+radar+dish+high+tech+army+theme" },
+      jp: { theme: "☔ 츠유(장마) 보라빛 수국 정원", b: "투명한 빗물이 맺힌 유리온실, 풍성한 수국과 테루테루보즈", n: "물안개 창문 질감, 흘러내리는 빗방울", f: "수국 꽃잎이 푸른색에서 보라색으로 변하는 애니", m: "물웅덩이 밟는 잔상, 반투명 비닐우산 깃발", vk: "수채화, 멜랑콜리, 파스텔블루", vfx: "화면 상단부터 떨어지는 리얼타임 빗물 셰이더", p: "isometric+mobile+game+base+glass+greenhouse+in+heavy+rain+blooming+purple+hydrangeas+teru+teru+bozu+dolls" },
+      us: { theme: "🌈 섬머 프라이드 무지개 파티", b: "루프탑 풀 파티장 배경, 네온 무지개 아치문 터널", n: "스펙트럼 무지개 그라데이션, 홀로그램 유니콘", f: "무지개 빛 파동이 맥박치듯 바운스 퍼지는 프레임", m: "롤러스케이트 이동 잔상, 미러볼 디스코텍 깃발", vk: "스펙트럼 무지개, 다양성, 펑키파티", vfx: "화려한 오로라/무지개 스펙트럼 후광, 별가루 샤이닝", p: "isometric+mobile+game+base+rooftop+pool+party+neon+glowing+rainbow+archways+pride+month+celebration" }
+    },
+    {
+      month: 7,
+      kr: { theme: "🏄 워터 슬라이드 핫 썸머", b: "투명한 초대형 워터슬라이드 튜브가 기지를 휘감는 형태", n: "투명한 수영장 타일 배경, 튜브 위에 누운 오리", f: "물줄기(스플래시)가 소용돌이치며 회전하는 애니", m: "서핑보드 파도 잔상, 라이프가드 보트 플래그", vk: "아쿠아블루, 익스트림 슬라이드, 청량함", vfx: "워터 스플래시 팡팡, 걸음마다 물기둥 솟구침", p: "isometric+mobile+game+base+giant+transparent+water+slide+wrapped+around+modern+building+water+park+theme" },
+      jp: { theme: "🌌 타나바타 은하수 소원 마츠리", b: "수천 장의 형형색색 소원지가 달린 거대 조릿대나무숲", n: "은하수 별빛 텍스처, 작게 흔들리는 사사잎", f: "은가루(별조각)가 띠를 이루며 쏟아져 내리는 프레임", m: "별자리(Constellation) 라인 잔상, 유카타 소매 깃발", vk: "은하수(Milky Way), 소원, 딥 네이비", vfx: "밤하늘 은하수 파노라마 뷰 이펙트, 샤이닝 반짝임", p: "isometric+mobile+game+base+giant+bamboo+tree+with+colorful+paper+wishes+tanzaku+starry+milky+way+night+sky" },
+      us: { theme: "🎆 7월 4일 바베큐 카니발", b: "마당에 대형 그릴 배치, 참나무 연기가 피어오르는 백야드", n: "레드 블루 핀스트라이프 배경, 바베큐 립 꼬치", f: "독립기념일 폭죽이 프레임 모서리에서 터지는 연출", m: "로켓 추진기처럼 전진 잔상, 패트리어트 스타 플래그", vk: "레드/화이트/블루, 바베큐 파이어, 펑키", vfx: "지속적인 다채로운 화약 폭죽(펑펑) 이펙트", p: "isometric+mobile+game+base+american+backyard+bbq+party+giant+grill+red+white+blue+fireworks+4th+of+july" }
+    },
+    {
+      month: 8,
+      kr: { theme: "🌺 광복의 달빛, 무궁화 정원", b: "기지 외벽을 무궁화 덩굴 장식이 감싸고 빛의 나비떼", n: "동양풍 화선지 질감, 은은한 먹선 무궁화", f: "전통 태극과 삼태극 마크 파동이 회전하는 프레임", m: "선비 도포 자락 바람결 잔상, 빛의 나비 플래그", vk: "우아함, 화이트/핑크, 민족의 자부심", vfx: "나비떼 흩날림, 신비한 펄 가루 일루전", p: "isometric+mobile+game+base+traditional+korean+palace+wall+covered+in+mugunghwa+hibiscus+vines+glowing+butterflies" },
+      jp: { theme: "🎇 오본 야시장과 불꽃 하나비", b: "여름 축제용 야타이(포장마차) 외형, 대형 금붕어 등불", n: "밤하늘 배경, 화려하게 피어오르는 불꽃", f: "액자 가장자리를 따라 불꽃놀이 도화선이 타들어가는 연출", m: "축제 가마(미코시) 묵직한 잔상, 물풍선 깃발", vk: "여름밤, 채도 높은 불꽃, 축제열기", vfx: "열기에 금붕어가 헤엄치는 듯한 아지랑이 왜곡, 섬광파", p: "isometric+mobile+game+base+japanese+summer+festival+yatai+food+stall+giant+glowing+goldfish+lantern+fireworks" },
+      us: { theme: "🚌 백 투 스쿨 틴에이지 로맨스", b: "하이틴 로맨스풍 거대한 노란색 하이스쿨 락커룸 타워", n: "구겨진 종이 질감 배경, 노란 연필 심볼", f: "마커펜 잉크 텍스처 타이포그래피 애니메이션", m: "스케이트보드 묘기 잔상, 주황 농구공 깃발", vk: "틴에이저 스웩, 크래프트, 옐로우/블랙", vfx: "카툰풍 땀방울 날림, 팝아트 코믹 북 이펙트", p: "isometric+mobile+game+base+retro+yellow+high+school+lockers+tower+back+to+school+theme+american+teenage" }
+    },
+    {
+      month: 9,
+      kr: { theme: "🌕 황금 보름달빛 한가위 추석", b: "둥근 보름달이 기지 위에 항상 떠있고 송편 오라 방출", n: "전통 조각보 복주머니 패턴 배경, 소나무와 달", f: "황금색 보름달빛 무리가 차오르는 호흡 애니메이션", m: "사물놀이 상모돌리기 리본춤 잔상, 옥토끼 절구 깃발", vk: "풍년 추수, 황금빛 달 아우라, 평온함", vfx: "황금 먼지 반짝임 산란, 스포트라이트 조명", p: "isometric+mobile+game+base+giant+golden+full+moon+glowing+over+korean+traditional+pavilion+chuseok+harvest" },
+      jp: { theme: "🍡 달맞이(츠키미) 은의 티하우스", b: "전통 툇마루 배경에 풍성한 억새풀과 당고 피라미드", n: "대나무 발장 질감 배경, 밤하늘을 보는 토끼", f: "가을 바람에 흔들리며 흩어지는 억새풀 갈대 프레임", m: "하얀 솜털 구름 토끼 점프 잔상, 삼색 당고 플래그", vk: "초가을 밤, 네이비/골드 매칭, 단아함", vfx: "살랑거리는 억새밭 사이 노란 반딧불 파티클", p: "isometric+mobile+game+base+japanese+tsukimi+moon+viewing+tea+house+silver+pampas+grass+dango+pyramid" },
+      us: { theme: "🍎 오텀 펌킨 스파이스 & 하베스트", b: "거대한 잭오랜턴 호박과 사과 박스로 축조된 전통 헛간", n: "원목 나무 판자 질감 배경, 윤기 나는 빨간 사과", f: "가을 단풍 낙엽들이 프레임을 빙글빙글 회전", m: "트랙터 묵직한 진동 잔상, 허수아비 깃발", vk: "오텀 멜로우, 번트 오렌지, 아메리칸 컨트리", vfx: "풍성한 단풍잎 흩날림, 석양의 붉은 노을빛 필터", p: "isometric+mobile+game+base+rustic+american+red+barn+giant+pumpkins+and+apple+crates+autumn+harvest+festival" }
+    },
+    {
+      month: 10,
+      kr: { theme: "🖋️ 위대한 글씨, 한글 타이포그래피", b: "훈민정음 언해본 문자가 홀로그램처럼 떠도는 기지", n: "백지 화선지 여백 배경, 붉은색 붓글씨 낙관", f: "검은색 먹물이 번지며 매화꽃이 피어나는 애니매이션", m: "자음/모음 재조합 사이버네틱 무브 잔상, 거대 붓끝 플래그", vk: "흑백 대비효과, 잉크 드롭, 여백의 미학", vfx: "강렬한 붓놀림 먹물 스플래터 파티클, 수묵화 번짐", p: "isometric+mobile+game+base+floating+abstract+black+ink+calligraphy+letters+wrapping+around+modern+building+korean" },
+      jp: { theme: "🍁 명품 가을 단풍(모미지) 노천탕", b: "붉게 물든 거대 단풍나무 밑 뜨거운 김 모락모락 노천 온천", n: "온천수 위 붉은 단풍잎 배경, 히노키 목재 바가지", f: "뜨거운 수증기가 프레임 가장자리를 뒤덮는 애니메이션", m: "나막신 발걸음 이펙트 잔상, 단풍잎 흩날림 깃발", vk: "레드/골드 스펙트럼, 릴랙싱, 가을 숲속", vfx: "실시간 스팀 피어오르는 파티클, 입체적인 단풍 낙엽 스월링", p: "isometric+mobile+game+base+japanese+outdoor+hot+spring+onsen+surrounded+by+red+maple+trees+steaming+water" },
+      us: { theme: "🎃 스푸키 할로윈 유령의 집", b: "으스스하게 일그러진 보라빛 저택, 지붕에 박쥐떼가 날고 잭오랜턴 점멸", n: "거미줄 쳐진 돌담 배경, 기괴하게 웃는 잭오랜턴", f: "초록색 야광 액체 슬라임이 흘러내리는 애니메이션", m: "투명한 망토 유령 플로팅 잔상, 해골 깃발", vk: "할로윈 돌연변이 퍼플, 딥 오렌지/블랙, 호러", vfx: "퍼플/네온 그린 독기 아우라 연기, 박쥐 궤적", p: "isometric+mobile+game+base+spooky+halloween+haunted+mansion+glowing+carved+pumpkins+green+ectoplasm+slime" }
+    },
+    {
+      month: 11,
+      kr: { theme: "🎯 수능 대박기원 오버패스", b: "기지 정문에 학업성취 부적 팝업, 지붕 위에 거대 찹쌀떡 탑 데코", n: "시험용 컴퓨터싸인펜 질감 배경, 100점 마크 심볼", f: "만점 과녁 중심에 야광 다트 화살이 꽂히는 루프", m: "정답콕콕 자이언트 포크 궤적 무빙, 네잎클로버 깃발", vk: "응원가, 열렬한 레드/화이트 조합, 행운부적", vfx: "골든 합격 광채 섬광, 별가루 축포 축하", p: "isometric+mobile+game+base+giant+lucky+yellow+talisman+stack+of+white+sticky+rice+cakes+korean+exam+success" },
+      jp: { theme: "👘 시치고산 종이 천학(오리가미)", b: "다채로운 치요가미 종이로만 접어 올린 거대 종이 성 건축물", n: "오리가미 질감 패턴 배경, 붉은 천학 심볼", f: "색종이 학 무리가 프레임 테두리를 비행하는 애니", m: "화려한 기모노 옷자락 잔상, 접선 종이 부채 깃발", vk: "종이예술 마스터피스, 비비드 스펙트럼", vfx: "빛 반사 각진 종이가루 흩날림, 프리즘 굴절", p: "isometric+mobile+game+base+magnificent+castle+made+entirely+of+colorful+origami+paper+folding+paper+cranes" },
+      us: { theme: "🦃 생스기빙 블랙프라이데이 크러시", b: "기지 중앙 거대한 칠면조 오븐구이 모형, 세일 홀로그램 스티커", n: "바코드 가격표 뒷배경 구겨진 질감, 과일 코르누코피아", f: "긴 쇼핑 영수증 열람지가 무한 출력되는 프레임", m: "카트레이싱 무서운 속도 돌진 잔상, 세일 플래그", vk: "광란의 마켓, 블랙&레드 자본주의, 아메리칸 러시", vfx: "그린 달러 지폐와 황금 동전 허리케인 스파클 효과", p: "isometric+mobile+game+base+giant+roasted+turkey+glowing+neon+sale+signs+black+friday+shopping+frenzy+thanksgiving" }
+    },
+    {
+      month: 12,
+      kr: { theme: "❄️ 첫눈 내리는 화이트 연말", b: "하얀 눈이 쌓인 모던형 서울 도심 옥상 테마, 따뜻한 펠릿 벽난로", n: "포근한 코바늘 니트 스웨터 텍스처, 빨간 벙어리 장갑", f: "서리 낀 유리창에 입김 호- 불어 크리스마스 별 그리는 애니", m: "눈덩이 던지기 강속구 전진 잔상, 털실 목도리 깃발", vk: "극강의 포근함, 코지(Cozy), 퓨어 화이트 매직", vfx: "실시간 환경 반응 입체 눈송이 낙하, 앰버 불빛 광원", p: "isometric+mobile+game+base+modern+city+rooftop+covered+in+thick+snow+warm+fireplace+glowing+through+glass" },
+      jp: { theme: "✨ 롯폰기 힐스 윈터 일루미네이션", b: "기지 전체를 수백만 개 라이트 블루 LED 전구로 촘촘하게 랩핑", n: "마이크로 LED 도트 발광 배경, 별빛 다이아 심볼", f: "네온 블루 전구들이 파도 타듯 차례로 스윕 점등", m: "레이저빔 쏘는 라인 잔상, 각진 크리스탈 얼음 깃발", vk: "사이버네틱 나이트, 네온 아이스블루, 글래머러스", vfx: "강렬한 광원의 블루 렌즈 플레어 남발, 샤프한 라이트 파장", p: "isometric+mobile+game+base+building+completely+covered+in+millions+of+blue+led+string+lights+illuminations" },
+      us: { theme: "🎅 웰컴 윈터 아메리칸 크리스마스", b: "산타 거대 목조 장난감 공장 기계, 컨베이어 선물 박스 포장", n: "두꺼운 빨간 벨벳 천조각 금치장 테두리 배경, 영롱한 황금 썰매종", f: "산타 요정 실루엣이 양옆에서 종을 흔드는 프레임", m: "루돌프 붉은 코 레이저 불빛 잔상, 캔디케인 양말 깃발", vk: "클래식 산타 레드, 홀리(Holy), 홀리데이 기프트", vfx: "별똥별 형태 서프라이즈 선물 낙하 이펙트, 마법가루 후행궤적", p: "isometric+mobile+game+base+giant+wooden+santa+toy+factory+conveyor+belt+with+presents+classic+american+christmas" }
+    }
+  ];
+
+  const tbody = document.getElementById('table-body');
+  
+  data.forEach(d => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="month-col">${d.month}월</td>
+      ${['kr', 'jp', 'us'].map(c => `
+        <td>
+          <div class="theme-title">
+            <span class="badge-${c}">${c === 'kr' ? 'KR 한국' : c === 'jp' ? 'JP 일본' : 'US 미국'}</span>
+            ${d[c].theme.includes(':') ? d[c].theme.split(':')[1].trim() : d[c].theme}
+          </div>
+          
+          <div class="img-wrapper" id="img-wrap-${d.month}-${c}">
+            <div class="loading-text">
+              <div class="spinner"></div>
+              <span>AI 이미지 생성중...</span>
+            </div>
+            <img src="https://image.pollinations.ai/prompt/${d[c].p}?width=400&height=225&nologo=true&seed=${Math.floor(Math.random()*100)}" 
+                 alt="Sample Concept" 
+                 class="sample-img" 
+                 loading="lazy"
+                 onload="this.classList.add('loaded')"
+                 onerror="this.style.display='none'; this.previousElementSibling.innerHTML='<span>이미지 생성 서버 지연</span>'">
+            <div class="img-overlay">AI Concept Art</div>
+          </div>
+
+          <ul class="content-list">
+            <li><span class="tag t-base">기지</span> <span>${d[c].b}</span></li>
+            <li><span class="tag t-name">이름표</span> <span>${d[c].n}</span></li>
+            <li><span class="tag t-frame">프레임</span> <span>${d[c].f}</span></li>
+            <li><span class="tag t-march">행군</span> <span>${d[c].m}</span></li>
+          </ul>
+          <div class="point-box">
+            <div class="point-row"><span class="hl-vk">[키워드]</span> ${d[c].vk}</div>
+            <div class="point-row"><span class="hl-vfx">[VFX 연출]</span> ${d[c].vfx}</div>
+          </div>
+        </td>
+      `).join('')}
+    `;
+    tbody.appendChild(tr);
+  });
+</script>
+
+</body>
+</html>
