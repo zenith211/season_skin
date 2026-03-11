@@ -106,68 +106,45 @@
   .badge-jp { background: rgba(236, 72, 153, 0.2); color: #f472b6; border: 1px solid #ec4899; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem; }
   .badge-us { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem; }
 
-  /* 이미지 영역 스타일 강화 */
-  .img-wrapper {
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    background: #111;
-    aspect-ratio: 16 / 9;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  /* 레퍼런스 링크 박스 스타일 */
+  .ref-links {
+    background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .loading-text {
-    position: absolute;
-    color: #a1a1aa;
-    font-size: 0.9rem;
-    z-index: 1;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
     display: flex;
     flex-direction: column;
+    gap: 6px;
+  }
+  .ref-links-title {
+    font-size: 0.8rem;
+    color: #a1a1aa;
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ref-link-item {
+    font-size: 0.9rem;
+    display: flex;
     align-items: center;
     gap: 8px;
   }
-  .spinner {
-    width: 24px;
-    height: 24px;
-    border: 3px solid rgba(255,255,255,0.1);
-    border-top-color: #a855f7;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+  .ref-link-item a {
+    color: #38bdf8;
+    text-decoration: none;
+    transition: color 0.2s;
+    word-break: break-all;
   }
-  @keyframes spin { 100% { transform: rotate(360deg); } }
-  
-  .sample-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    position: relative;
-    z-index: 2;
-    transition: transform 0.4s ease, opacity 0.4s ease;
-    opacity: 0;
+  .ref-link-item a:hover {
+    color: #7dd3fc;
+    text-decoration: underline;
   }
-  .sample-img.loaded {
-    opacity: 1;
-  }
-  .img-wrapper:hover .sample-img {
-    transform: scale(1.08);
-  }
-  .img-overlay {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    padding: 10px;
+  .link-icon {
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.9);
-    text-align: right;
-    pointer-events: none;
-    z-index: 3;
-    font-weight: bold;
+    opacity: 0.7;
   }
 
   .content-list {
@@ -261,7 +238,7 @@
 <div class="container">
   <header>
     <h1>글로벌 모바일 게임 시즌 스킨 기획서</h1>
-    <div class="desc">한국 🇰🇷 · 일본 🇯🇵 · 미국 🇺🇸 시장을 타겟팅한 1~12월 시즌 스킨 매트릭스 (AI 샘플 이미지 포함)</div>
+    <div class="desc">한국 🇰🇷 · 일본 🇯🇵 · 미국 🇺🇸 시장을 타겟팅한 1~12월 시즌 스킨 매트릭스 (종교적/정치적 중립성 확보)</div>
   </header>
 
   <table>
@@ -280,83 +257,301 @@
 
   <div class="summary">
     <h2>✨ 핵심 컨셉 요약</h2>
-    <p>"각 국가의 문화적 공감대를 자극하는 트렌디한 시각적 번역으로 글로벌 유저의 소유욕을 극대화하라!"</p>
+    <p>"글로벌 유저 누구나 거부감 없이 즐길 수 있는 중립적이고 트렌디한 시즌 시각 오락!"</p>
   </div>
 </div>
 
 <script>
+  // 업데이트 내역: 신사(1월 JP), 세인트패트릭/가톨릭(3월 US), 이스터/부활절(4월 US), 크리스마스 특정종교색(12월 US) 등을
+  // 대중적이고 중립적인 계절/축제 문화 테마로 전면 교체
   const data = [
     {
       month: 1,
-      kr: { theme: "🌟 설날: 까치와 복주머니", b: "전통 기와집 텍스처, 처마 끝 청사초롱 점등", n: "단청 문양 배경, '복(福)' 한자 심볼", f: "금실로 수놓은 비단 테두리와 까치 비행 애니메이션", m: "전통 가마 이동 잔상, 엽전 흩날림 깃발", vk: "오방색, 전통, 풍요", vfx: "황금빛 엽전 파티클, 은은한 등불 스와이프", p: "isometric+mobile+game+base+korean+traditional+hanok+roof+lunar+new+year+colorful+lanterns+3d+game+art" },
-      jp: { theme: "🌟 오쇼가츠: 카도마츠 신사", b: "토리이 출입구, 카도마츠 장식 및 타종 이펙트", n: "접이식 부채 배경, 벚꽃 심볼", f: "시메나와(금줄) 테두리 진동 애니메이션", m: "여우 가면 부대 잔상, 부적(오마모리) 깃발", vk: "신성함, 기원, 일본풍", vfx: "신비로운 연기(스모크), 벚꽃잎 낙하", p: "isometric+mobile+game+base+japanese+shinto+shrine+torii+gate+new+year+decor+shimenawa+3d+game+art" },
-      us: { theme: "🌟 타임스퀘어 단독 파티", b: "네온사인 빌보드, 미러볼 카운트다운 드랍 이펙트", n: "화려한 80s 네온사인 폰트, 폭죽 심볼", f: "카운트다운 시계 테두리 회전 이펙트", m: "리무진 이동 잔상, 반짝이는 스파클러 깃발", vk: "파티, 화려함, 네온", vfx: "글리터 스파클, 색종이(컨페티) 팡파르", p: "isometric+mobile+game+base+times+square+new+year+party+neon+lights+glowing+disco+ball+fireworks+3d" }
+      kr: { 
+        theme: "🌟 새해 첫날: 까치와 복주머니", b: "전통 기와집 텍스처, 처마 끝 청사초롱 점등", n: "단청 문양 배경, '복(福)' 한자 심볼", f: "금실로 수놓은 비단 테두리와 까치 비행 애니메이션", m: "전통 가마 이동 잔상, 엽전 흩날림 깃발", vk: "오방색, 전통, 풍요", vfx: "황금빛 엽전 파티클, 은은한 등불 스와이프", 
+        refs: [
+          { name: "Pinterest: 게임 배경 기와집 아트", url: "https://www.pinterest.co.kr/search/pins/?q=korean%20traditional%20house%20game%20art" },
+          { name: "ArtStation: 새해 컨셉 프랍 세트", url: "https://www.artstation.com/search?sort_by=relevance&query=lunar%20new%20year%20props" }
+        ] 
+      },
+      jp: { 
+        theme: "🌟 윈터 온천(Onsen) 리조트", b: "목조 디자인의 고급 료칸(여관), 앞마당에 따뜻한 모닥불과 족욕탕", n: "포근한 무명천(노렌) 질감, 대나무 자쿠지 심볼", f: "수증기가 액자 가장자리를 뿌옇게 감싸는 애니메이션", m: "폭신한 다다미 슬리퍼 발자국 잔상, 유카타 깃발", vk: "모던 료칸, 릴랙싱, 휴양", vfx: "따뜻한 김(Steam) 피어오름, 잔잔한 수조 물결", 
+        refs: [
+          { name: "Pinterest: 일본 료칸(여관) 밤풍경 원화", url: "https://www.pinterest.co.kr/search/pins/?q=japanese%20ryokan%20game%20background" },
+          { name: "ArtStation: 온천 리조트 수증기 이펙트", url: "https://www.artstation.com/search?sort_by=relevance&query=hot%20spring%20resort%20environment" }
+        ] 
+      },
+      us: { 
+        theme: "🌟 타임스퀘어 뉴이어 파티", b: "네온사인 빌보드, 미러볼 카운트다운 드랍 이펙트", n: "화려한 80s 네온사인 폰트, 폭죽 심볼", f: "카운트다운 시계 테두리 회전 이펙트", m: "리무진 이동 잔상, 반짝이는 스파클러 깃발", vk: "파티, 화려함, 네온", vfx: "글리터 스파클, 색종이(컨페티) 팡파르", 
+        refs: [
+          { name: "ArtStation: 뉴욕 카운트다운 파티 일러스트", url: "https://www.artstation.com/search?sort_by=relevance&query=new%20york%20countdown%20party" },
+          { name: "Pinterest: 80s 레트로 네온사인 디자인", url: "https://www.pinterest.co.kr/search/pins/?q=80s%20neon%20sign%20UI" }
+        ] 
+      }
     },
     {
       month: 2,
-      kr: { theme: "🍫 달콤한 발렌타인", b: "오버사이즈 초콜릿 성상, 딸기 시럽이 흐르는 외벽", n: "판초콜릿 패턴, 하트 날개 심볼", f: "초콜릿 퐁듀가 흘러내리는 테두리 애니메이션", m: "하트모양 마차 잔상, 큐피드 화살 깃발", vk: "스위트, 핑크, 로맨틱", vfx: "러브 하트 팝핑, 시럽 멜팅 텍스처", p: "isometric+mobile+game+base+giant+chocolate+castle+strawberry+syrup+dripping+pink+sweet+valentine+theme+3d" },
-      jp: { theme: "❄️ 삿포로 눈축제 페스타", b: "정교한 얼음 조각 성벽, 이글루 형태 관저", n: "서리 낀 유리 질감, 눈송이 심볼", f: "얼음 결정(크리스탈) 자라나는 애니메이션", m: "눈썰매 보드 잔상, 펭귄 모티브 깃발", vk: "투명함, 크리스탈, 겨울축제", vfx: "주변 공기 서리화(Frost) 이펙트, 은은한 입김 발생", p: "isometric+mobile+game+base+sapporo+snow+festival+intricate+ice+sculpture+castle+glowing+blue+ice+3d+frozen" },
-      us: { theme: "🏈 슈퍼볼 위크엔드 매니아", b: "그리디언트(Gridiron) 코트 질감 기지, 대형 전광판 팝업", n: "가죽 풋볼 질감 배경, MVP 텍스트 심볼", f: "스타디움 서치라이트 교차 애니", m: "태클 돌진 잔상, 폼 핑거 깃발", vk: "스포티, 열광, 스타디움", vfx: "서치라이트 빙글빙글 스윕, 함성 파장", p: "isometric+mobile+game+base+american+football+stadium+style+base+giant+jumbotron+searchlights+shining+3d" }
+      kr: { 
+        theme: "🍫 달콤한 스위트 디저트 카페", b: "오버사이즈 초콜릿 블록 성상, 딸기 시럽이 흐르는 외벽", n: "판초콜릿 패턴, 하트 날개 심볼", f: "초콜릿 퐁듀가 흘러내리는 테두리 애니메이션", m: "바삭한 마카롱 굴러가는 잔상, 핑크 리본 깃발", vk: "스위트, 핑크, 로맨틱", vfx: "러브 하트 팝핑, 시럽 멜팅 텍스처", 
+        refs: [
+          { name: "Pinterest: 초콜릿 하우스 캐주얼 게임 원화", url: "https://www.pinterest.co.kr/search/pins/?q=chocolate%20house%20casual%20game" },
+          { name: "ArtStation: 캔디크러쉬 스타일 UI 프레임", url: "https://www.artstation.com/search?sort_by=relevance&query=candy%20ui%20frame" }
+        ] 
+      },
+      jp: { 
+        theme: "❄️ 삿포로 눈꽃 페스티벌", b: "정교한 얼음 조각 성벽, 이글루 형태 관저", n: "서리 낀 유리 질감, 눈송이 심볼", f: "얼음 결정(크리스탈) 자라나는 애니메이션", m: "눈썰매 보드 잔상, 펭귄 모티브 깃발", vk: "투명함, 크리스탈, 겨울축제", vfx: "주변 공기 서리화(Frost) 이펙트, 은은한 입김 발생", 
+        refs: [
+          { name: "ArtStation: 얼음 성(Ice Castle) 3D 모델링", url: "https://www.artstation.com/search?sort_by=relevance&query=ice%20castle" },
+          { name: "Pinterest: 겨울 축제 얼음 조각 레퍼런스", url: "https://www.pinterest.co.kr/search/pins/?q=ice%20sculpture%20festival%20reference" }
+        ] 
+      },
+      us: { 
+        theme: "🏈 스타디움 스포츠 매니아 (슈퍼볼)", b: "그리디언트(Gridiron) 코트 질감 기지, 대형 전광판 팝업", n: "가죽 풋볼 질감 배경, MVP 텍스트 심볼", f: "스타디움 서치라이트 교차 애니", m: "태클 돌진 잔상, 폼 핑거(Foam Finger) 깃발", vk: "스포티, 열광, 스타디움", vfx: "서치라이트 빙글빙글 스윕, 함성 파장", 
+        refs: [
+          { name: "Pinterest: 미식축구 경기장 UI 레이아웃", url: "https://www.pinterest.co.kr/search/pins/?q=american%20football%20stadium%20UI" },
+          { name: "ArtStation: 스포츠 스타디움 조명 이펙트", url: "https://www.artstation.com/search?sort_by=relevance&query=stadium%20lights%20vfx" }
+        ] 
+      }
     },
     {
       month: 3,
-      kr: { theme: "🎒 두근두근 새학기 등교", b: "봄날의 모던형 학교 캠퍼스, 노란 셔틀버스 정차", n: "초록색 칠판 텍스처 배경, 분필 글씨 심볼", f: "개나리꽃 화관이 가장자리를 도는 프레임", m: "두발자전거 이동 잔상, 옐로우 백팩 깃발", vk: "설렘, 개나리빛, 영(Young)", vfx: "따스한 햇살 렌즈 플레어, 분필 가루 흩날림", p: "isometric+mobile+game+base+modern+high+school+campus+in+spring+season+yellow+school+bus+forsythia+flowers" },
-      jp: { theme: "🌸 밤벚꽃 하나미 축제", b: "거대한 만개 벚나무가 기지를 덮고 핑크빛 초롱 야간 점등", n: "핑크 그라데이션, 떨어지는 벚꽃잎 심볼", f: "벚꽃 가지가 살랑이며 꽃잎들이 흩날리는 테두리", m: "벚꽃 회오리 잔상, 단풍 깃발", vk: "흩날림, 핑크 나이트, 낭만풍", vfx: "상시 벚꽃 낙하 파티클, 바람결 이펙트", p: "isometric+mobile+game+base+giant+cherry+blossom+tree+blooming+at+night+illuminated+by+pink+paper+lanterns" },
-      us: { theme: "🍀 세인트 패트릭 럭키 펍", b: "거대한 다크그린 아일랜드 펍, 지붕 끝에 무지개와 황금 단지", n: "세잎 클로버 패턴 배경, 행운의 요정 마크", f: "황금 동전이 굴러다니는 애니메이션", m: "초록 연막탄 전진, 레프러콘 톱햇 깃발", vk: "딥그린, 행운, 골드 코인", vfx: "황금빛 코인 분수 팝, 무지개 잔상 궤적", p: "isometric+mobile+game+base+dark+green+irish+pub+magic+rainbow+ending+in+a+pot+of+gold+st+patricks+day" }
+      kr: { 
+        theme: "🎒 새학기 캠퍼스 라이프", b: "봄날의 모던형 메인 캠퍼스 건물, 노란 셔틀버스 정차", n: "초록색 칠판 텍스처 배경, 분필 글씨 심볼", f: "개나리꽃 화관이 가장자리를 도는 프레임", m: "두발자전거 이동 잔상, 옐로우 백팩 깃발", vk: "설렘, 개나리빛, 영(Young)", vfx: "따스한 햇살 렌즈 플레어, 분필 가루 흩날림", 
+        refs: [
+          { name: "Pinterest: 이소메트릭 일본 학교 배경", url: "https://www.pinterest.co.kr/search/pins/?q=isometric%20school%20building%20spring" },
+          { name: "ArtStation: 학교 칠판 UI 텍스처", url: "https://www.artstation.com/search?sort_by=relevance&query=chalkboard%20menu%20ui" }
+        ] 
+      },
+      jp: { 
+        theme: "🌸 밤벚꽃 하나미(꽃구경) 파티", b: "거대한 만개 벚나무가 기지를 덮고 핑크빛 초롱(디자인 중립) 야간 점등", n: "핑크 그라데이션, 떨어지는 벚꽃잎 심볼", f: "벚꽃 가지가 살랑이며 꽃잎들이 흩날리는 테두리", m: "벚꽃 회오리 잔상, 단풍 깃발", vk: "흩날림, 핑크 나이트, 낭만풍", vfx: "상시 벚꽃 낙하 파티클, 바람결 이펙트", 
+        refs: [
+          { name: "ArtStation: 밤 벚꽃 공원 환경 아트", url: "https://www.artstation.com/search?sort_by=relevance&query=hanami%20night%20environment" },
+          { name: "Pinterest: 일본 벚꽃 초롱 UI 디자인", url: "https://www.pinterest.co.kr/search/pins/?q=cherry%20blossom%20lantern%20ui" }
+        ] 
+      },
+      us: { 
+        theme: "🍿 할리우드 프리미어 무비나잇", b: "화려한 붉은 융단(레드카펫)과 빈티지 영화관 티켓부스, 대형 스크린 벽면", n: "영화 슬레이트보드 텍스처, 쏟아지는 팝콘 심볼", f: "카메라 플래시가 번쩍이며 필름 릴이 굴러가는 테두리 연출", m: "스포트라이트를 받으며 걷는 화려한 잔상, 영화 필름 마크 깃발", vk: "글래머, 시네마, 레드카펫", vfx: "카메라 파파라치 플래시 터짐, 빈티지 필름 노이즈(그레인) 효과", 
+        refs: [
+          { name: "Pinterest: 클래식 할리우드 영화관 배경 아트", url: "https://www.pinterest.co.kr/search/pins/?q=cinema%20theater%20exterior%20art" },
+          { name: "ArtStation: 무비 슬레이트 및 팝콘 UI 에셋", url: "https://www.artstation.com/search?sort_by=relevance&query=movie%20props%20game%20art" }
+        ] 
+      }
     },
     {
       month: 4,
-      kr: { theme: "🌳 생명의 식목일 포레스트", b: "거대한 신목(고목나무) 아래 지어진 베이스캠프", n: "초록빛 이끼 배경, 돋아나는 떡잎 심볼", f: "빛의 나비들이 원형을 그리며 나는 효과", m: "걸음마다 묘목 자라나는 잔상, 도토리 깃발", vk: "에코, 힐링, 생명력 베이스", vfx: "초록빛 치유의 빛 줄기, 반딧불이 반짝임", p: "isometric+mobile+game+base+built+around+a+massive+ancient+magic+tree+glowing+green+leaves+healing+light" },
-      jp: { theme: "🚄 골든위크 기차 여행", b: "도쿄역 모티브 붉은 벽돌 건물, 거대 여행용 트렁크 장식", n: "여권 스탬프 용지 배경, 비행기 실루엣", f: "장난감 태엽 기차가 순회하는 애니메이션", m: "신칸센 쾌속 잔상, 가이드 깃발", vk: "여행, 스팀펑크 레일, 플랫폼", vfx: "바퀴 마찰 스파크, 하얀 증기 배출 파티클", p: "isometric+mobile+game+base+classic+red+brick+train+station+giant+vintage+luggage+golden+week+travel+railway" },
-      us: { theme: "🐰 파스텔 이스터 에그 헌트", b: "파스텔톤 체크무늬 지붕, 풀숲에 숨겨진 자이언트 에그", n: "부활절 달걀 패턴 배경, 깡총거리는 토끼", f: "데이지 꽃과 파스텔 리본이 물결치는 애니", m: "통통 튀는 이동 연출, 당근 깃발", vk: "파스텔 톤업, 큐트, 바스켓", vfx: "에그 크래킨 팝핑 효과, 솜털 스월링", p: "isometric+mobile+game+base+pastel+colored+cute+cottage+giant+easter+eggs+hidden+in+grass+bunny+ears+3d" }
+      kr: { 
+        theme: "🌳 에코 포레스트 (식목일)", b: "거대한 고목나무 둥치 아래 지어진 모던 베이스캠프", n: "초록빛 풀숲 배경, 돋아나는 새싹 떡잎 심볼", f: "빛의 나비들이 원형을 그리며 나는 효과", m: "걸음마다 묘목 자라나는 잔상, 도토리 깃발", vk: "에코, 힐링, 생명력 베이스", vfx: "초록빛 치유의 빛 줄기, 반딧불이 반짝임", 
+        refs: [
+          { name: "ArtStation: 판타지 월드트리(World Tree) 컨셉", url: "https://www.artstation.com/search?sort_by=relevance&query=fantasy%20world%20tree" },
+          { name: "Pinterest: 숲 속 베이스캠프 원화", url: "https://www.pinterest.co.kr/search/pins/?q=forest%20basecamp%20isometric" }
+        ] 
+      },
+      jp: { 
+        theme: "🚄 기차 여행 (스프링 베케이션)", b: "근대 붉은 벽돌의 거대 기차역 건물, 역 앞 여행용 트렁크 장식", n: "여권 스탬프 찍힌 종이 질감, 비행기 실루엣", f: "장난감 태엽 기차가 역동적으로 주행하는 애니메이션", m: "신칸센(초고속기차) 쾌속 잔상, 가이드 깃발", vk: "여행, 스팀펑크 레일, 플랫폼", vfx: "바퀴 마찰 스파크, 하얀 증기(Steam) 배출 파티클", 
+        refs: [
+          { name: "Pinterest: 빈티지 붉은 벽돌 기차역 일러스트", url: "https://www.pinterest.co.kr/search/pins/?q=vintage%20train%20station%20illustration" },
+          { name: "ArtStation: 기차표/스탬프 인벤토리 UI", url: "https://www.artstation.com/search?sort_by=relevance&query=train%20ticket%20ui" }
+        ] 
+      },
+      us: { 
+        theme: "🎡 스프링 카니발 & 롤러코스터", b: "파스텔톤의 대형 대관람차(Ferris Wheel)와 화려한 롤러코스터 트랙 기지", n: "놀이공원 회전목마 지붕 패턴, 솜사탕 심볼", f: "놀이공원 전구(페어리 라이트)가 깜빡이며 테두리를 도는 애니메이션", m: "범퍼카를 타고 통통 튀며 이동하는 잔상, 헬륨 풍선 깃발", vk: "파스텔 톤업, 테마파크, 조이풀", vfx: "공중에 흩날리는 테이프 조각(컨페티), 즐거운 회전 이펙트", 
+        refs: [
+          { name: "Pinterest: 롤러코스터 카니발 캐주얼 타운 디자인", url: "https://www.pinterest.co.kr/search/pins/?q=carnival%20theme%20park%20game%20art" },
+          { name: "ArtStation: 화려한 놀이공원 전구 셰이더", url: "https://www.artstation.com/search?sort_by=relevance&query=amusement%20park%20fairy%20lights" }
+        ] 
+      }
     },
     {
       month: 5,
-      kr: { theme: "🎢 테마파크 칠드런스 데이", b: "거대 장난감 블록 조립 캐슬, 작동하는 회전관람차", n: "레고풍 닉네임, 알록달록 헬륨 풍선 번들", f: "빙글빙글 도는 장난감 톱니바퀴 프레임", m: "장난감 태엽 자동차 잔상, 피에로 모자 플래그", vk: "토이, 비비드 풀컬러, 액티브", vfx: "비누방울 몽글몽글 발생, 태엽 스월", p: "isometric+mobile+game+base+giant+toy+block+castle+theme+park+ferris+wheel+vivid+colorful+children+day" },
-      jp: { theme: "🎏 천공의 코이노보리 페스타", b: "일본풍 목조 저택 옥상 바람 타는 대형 잉어 연출", n: "푸른 물결 패턴 배경, 금빛 잉어 비늘", f: "바람에 펄럭이는 잉어 꼬리 지느러미 테두리", m: "물보라 서핑 잔상, 사무라이 투구 깃발", vk: "바람, 푸른 파도, 잉어 연", vfx: "바람을 가르는 윈드 파티클, 물방울 튀김", p: "isometric+mobile+game+base+japanese+wooden+mansion+flying+giant+koinobori+carp+streamers+summer+sky" },
-      us: { theme: "🪅 싱코 데 마요 라틴 피에스타", b: "오색 피냐타 형태 기지, 테킬라 오크통 바리케이드", n: "멕시칸 담요 패턴, 흔들리는 솜브레로", f: "피냐타 종이 조각이 떨어지는 프레임", m: "라틴 댄스 스텝 연출 잔상, 멕시칸 판초 깃발", vk: "카니발 축제, 오렌지/레드, 핫바이브", vfx: "마라카스 브라스 뮤직 이펙트 선, 색종이 폭죽 스파클", p: "isometric+mobile+game+base+giant+colorful+pinata+building+cinco+de+mayo+festival+festive+mexican+flags" }
+      kr: { 
+        theme: "🎢 토이 어드벤처 (어린이날)", b: "거대 장난감 블록(블럭토이)으로 거칠게 조립된 캐슬", n: "레고풍 닉네임, 알록달록 헬륨 풍선 번들", f: "빙글빙글 도는 플라스틱 톱니바퀴 프레임", m: "장난감 태엽 자동차 바퀴 잔상, 피에로 모자 플래그", vk: "토이, 비비드 풀컬러, 액티브", vfx: "비누방울 몽글몽글 발생, 태엽 스월", 
+        refs: [
+          { name: "ArtStation: 토이월드 이소메트릭 배경", url: "https://www.artstation.com/search?sort_by=relevance&query=toy%20world%20isometric" },
+          { name: "Pinterest: 장난감 블록 UI 디자인", url: "https://www.pinterest.co.kr/search/pins/?q=toy%20block%20UI%20game" }
+        ] 
+      },
+      jp: { 
+        theme: "🎏 천공의 코이노보리 (잉어바람개비)", b: "일본풍 목조 저택 옥상에서 바람을 거세게 타는 대형 잉어 연 모양 설치미술", n: "푸른 물결(세이카이하) 단청 패턴, 금빛 잉어 비늘", f: "바람에 펄럭이는 잉어 꼬리 지느러미 테두리", m: "물보라 서핑 잔상, 천 장식(하치마키) 깃발", vk: "바람, 푸른 파도, 잉어 연", vfx: "바람을 가르는 윈드 파티클, 물방울 튀김", 
+        refs: [
+          { name: "Pinterest: 코이노보리 애니메이션 레이아웃", url: "https://www.pinterest.co.kr/search/pins/?q=koinobori%20anime%20background" },
+          { name: "ArtStation: 일본 전통 직물 수면파도 패턴", url: "https://www.artstation.com/search?sort_by=relevance&query=japanese%20wave%20pattern" }
+        ] 
+      },
+      us: { 
+        theme: "🪅 싱코 데 마요 라틴 피에스타", b: "오색 피냐타(타격용 장난감) 형태 기지, 다채로운 패턴 바리케이드", n: "멕시칸 직조 담요 패턴, 흔들리는 솜브레로(챙 넓은 모자)", f: "피냐타의 오색 종이 조각이 쉼없이 떨어지는 프레임", m: "흥겨운 라틴 댄스 스텝 연출 잔상, 판초 문양 깃발", vk: "카니발 축제, 오렌지/레드, 핫바이브", vfx: "마라카스 브라스 뮤직 이펙트 선, 팝핑 스파클", 
+        refs: [
+          { name: "ArtStation: 핀야타 파티 컨셉 모델", url: "https://www.artstation.com/search?sort_by=relevance&query=mexican%20pinata%20props" },
+          { name: "Pinterest: 멕시코 전통 축제 색감 연구", url: "https://www.pinterest.co.kr/search/pins/?q=cinco%20de%20mayo%20party%20colors" }
+        ] 
+      }
     },
     {
       month: 6,
-      kr: { theme: "🎖️ K-아미 호국보훈 위장기지", b: "K-밀리터리 최첨단 카모플라쥬 도색, 회전 레이더망", n: "빛바랜 군번줄 소재, 무궁화와 태극문양", f: "저격총 스코프 타겟팅 HUD 애니메이션", m: "전술기동 잔상 궤적, K-아미 부대마크 플래그", vk: "그리드, 솔리드 메탈, 전술기동", vfx: "야간 투시경 그린 글로우 효과, 레이더 스캐닝 파장", p: "isometric+mobile+game+base+advanced+military+camouflage+bunker+spinning+radar+dish+high+tech+army+theme" },
-      jp: { theme: "☔ 츠유(장마) 보라빛 수국 정원", b: "투명한 빗물이 맺힌 유리온실, 풍성한 수국과 테루테루보즈", n: "물안개 창문 질감, 흘러내리는 빗방울", f: "수국 꽃잎이 푸른색에서 보라색으로 변하는 애니", m: "물웅덩이 밟는 잔상, 반투명 비닐우산 깃발", vk: "수채화, 멜랑콜리, 파스텔블루", vfx: "화면 상단부터 떨어지는 리얼타임 빗물 셰이더", p: "isometric+mobile+game+base+glass+greenhouse+in+heavy+rain+blooming+purple+hydrangeas+teru+teru+bozu+dolls" },
-      us: { theme: "🌈 섬머 프라이드 무지개 파티", b: "루프탑 풀 파티장 배경, 네온 무지개 아치문 터널", n: "스펙트럼 무지개 그라데이션, 홀로그램 유니콘", f: "무지개 빛 파동이 맥박치듯 바운스 퍼지는 프레임", m: "롤러스케이트 이동 잔상, 미러볼 디스코텍 깃발", vk: "스펙트럼 무지개, 다양성, 펑키파티", vfx: "화려한 오로라/무지개 스펙트럼 후광, 별가루 샤이닝", p: "isometric+mobile+game+base+rooftop+pool+party+neon+glowing+rainbow+archways+pride+month+celebration" }
+      kr: { 
+        theme: "🎖️ K-아미 전술 통제소", b: "방탄 재질의 최첨단 육각형 카모플라쥬 도색, 옥상의 거대 회전식 레이더", n: "빛바랜 군번줄 메탈릭 소재, 별 마크 훈장 심볼", f: "스나이퍼 스코프 타겟팅 HUD 애니메이션", m: "무한궤도(탱크) 지그재그 전술기동 잔상, 디지털 카모 깃발", vk: "철갑, 솔리드 메탈, 전술기동", vfx: "야간 투시경의 네온 그린 글로우 효과, 레이더 스캐닝 파장", 
+        refs: [
+          { name: "Pinterest: 밀리터리 전략베이스 컨셉 원화", url: "https://www.pinterest.co.kr/search/pins/?q=military%20bunker%20concept%20art" },
+          { name: "ArtStation: FPS HUD 밀리터리 UI 스코프", url: "https://www.artstation.com/search?sort_by=relevance&query=sniper%20scope%20crosshair" }
+        ] 
+      },
+      jp: { 
+        theme: "☔ 츠유(장마) 글래스 가든", b: "투명한 빗물이 방울방울 맺힌 유리온실, 풍성한 수국 꽃밭", n: "물안개 낀 유리창 질감, 흘러내리는 빗방울", f: "수국 꽃잎 색상이 푸른색에서 보라색으로 천천히 변하는 애니메이션", m: "얕은 물웅덩이 찰박찰박 밟는 잔상, 반투명 비닐우산 장식", vk: "수채화, 서정적, 파스텔블루", vfx: "화면 상단부터 떨어지는 리얼타임 빗물(Rain) 셰이더", 
+        refs: [
+          { name: "ArtStation: 수국 피는 온실 인테리어 아트", url: "https://www.artstation.com/search?sort_by=relevance&query=greenhouse%20hydrangea" },
+          { name: "Pinterest: 비오는 창문 애니메이션 GIF", url: "https://www.pinterest.co.kr/search/pins/?q=rainy%20window%20anime%20aesthetic" }
+        ] 
+      },
+      us: { 
+        theme: "🌈 무지개 컬러 런(Color Run)", b: "루프탑 마라톤 스튜디오, 네온 무지개 컬러 아치문 터널 배치", n: "페인트가 튄 물감 그라데이션, 홀로그램 로고 심볼", f: "화려한 형광색 물감이 화면 사방에서 터지며 흘러내리는 프레임", m: "롤러스케이트 이동 잔상, 미러볼 디스코텍 깃발", vk: "페인트 스플래터, 다양성 에너지, 액티브", vfx: "걸음마다 오로라 페인트 폭죽 퍼짐, 형광 별가루 Ша이닝", 
+        refs: [
+          { name: "Pinterest: 컬러 런 페스티벌 물감 폭발 레퍼런스", url: "https://www.pinterest.co.kr/search/pins/?q=color%20run%20powder%20festival" },
+          { name: "ArtStation: 네온 페인트 스플래터 UI", url: "https://www.artstation.com/search?sort_by=relevance&query=neon%20paint%20splatter%20ui" }
+        ] 
+      }
     },
     {
       month: 7,
-      kr: { theme: "🏄 워터 슬라이드 핫 썸머", b: "투명한 초대형 워터슬라이드 튜브가 기지를 휘감는 형태", n: "투명한 수영장 타일 배경, 튜브 위에 누운 오리", f: "물줄기(스플래시)가 소용돌이치며 회전하는 애니", m: "서핑보드 파도 잔상, 라이프가드 보트 플래그", vk: "아쿠아블루, 익스트림 슬라이드, 청량함", vfx: "워터 스플래시 팡팡, 걸음마다 물기둥 솟구침", p: "isometric+mobile+game+base+giant+transparent+water+slide+wrapped+around+modern+building+water+park+theme" },
-      jp: { theme: "🌌 타나바타 은하수 소원 마츠리", b: "수천 장의 형형색색 소원지가 달린 거대 조릿대나무숲", n: "은하수 별빛 텍스처, 작게 흔들리는 사사잎", f: "은가루(별조각)가 띠를 이루며 쏟아져 내리는 프레임", m: "별자리(Constellation) 라인 잔상, 유카타 소매 깃발", vk: "은하수(Milky Way), 소원, 딥 네이비", vfx: "밤하늘 은하수 파노라마 뷰 이펙트, 샤이닝 반짝임", p: "isometric+mobile+game+base+giant+bamboo+tree+with+colorful+paper+wishes+tanzaku+starry+milky+way+night+sky" },
-      us: { theme: "🎆 7월 4일 바베큐 카니발", b: "마당에 대형 그릴 배치, 참나무 연기가 피어오르는 백야드", n: "레드 블루 핀스트라이프 배경, 바베큐 립 꼬치", f: "독립기념일 폭죽이 프레임 모서리에서 터지는 연출", m: "로켓 추진기처럼 전진 잔상, 패트리어트 스타 플래그", vk: "레드/화이트/블루, 바베큐 파이어, 펑키", vfx: "지속적인 다채로운 화약 폭죽(펑펑) 이펙트", p: "isometric+mobile+game+base+american+backyard+bbq+party+giant+grill+red+white+blue+fireworks+4th+of+july" }
+      kr: { 
+        theme: "🏄 워터파크 익스트림 슬라이드", b: "투명하고 거대한 아쿠아 튜브 슬라이드가 기지를 휘감아 도는 리조트", n: "투명한 아쿠아블루 수영장 타일 배경, 튜브 위에 누운 오리", f: "시원한 물줄기(스플래시)가 소용돌이치며 물살을 가르는 애니메이션", m: "서핑보드로 파도를 치고 나가는 잔상, 라이프가드 튜브 깃발", vk: "아쿠아블루, 익스트림, 청량함", vfx: "강력한 워터 스플래시 팡팡, 걸음마다 물기둥이 솟구침", 
+        refs: [
+          { name: "ArtStation: 워터파크 튜브 슬라이드 모델링", url: "https://www.artstation.com/search?sort_by=relevance&query=water%20slide%20isometric" },
+          { name: "Pinterest: 서핑 물보라 그래픽 이펙트", url: "https://www.pinterest.co.kr/search/pins/?q=water%20splash%20vfx%20game" }
+        ] 
+      },
+      jp: { 
+        theme: "🌌 한여름 밤의 데스페라도(불꽃놀이)", b: "일본식 다리가 놓인 강가 배경, 웅장한 야시장(마츠리) 타워", n: "여름밤 밤하늘 텍스처, 화려하게 피어오르는 불꽃 심볼", f: "로켓 폭죽의 도화선 심지가 액자 겉면을 따라 빠르게 타들어가는 직관적 무빙", m: "강렬한 섬광(불꽃) 추진력으로 돌진하는 잔상, 물풍선 요요 깃발", vk: "루비 레드, 파이어워크, 여름 열대야", vfx: "밤하늘에 대형 불꽃이 터지고 흩어지는 파노라마 뷰 연출", 
+        refs: [
+          { name: "Pinterest: 야간 불꽃놀이 축제 타워 일러스트", url: "https://www.pinterest.co.kr/search/pins/?q=summer%20festival%20fireworks%20tower" },
+          { name: "ArtStation: 화약 폭발 일루미네이션 파티클", url: "https://www.artstation.com/search?sort_by=relevance&query=fireworks%20particle%20fx" }
+        ] 
+      },
+      us: { 
+        theme: "🍔 아메리칸 썸머 바베큐 야영장", b: "외곽에 대형 카라반(크로스오버 캠핑카) 주차, 고기 굽는 거대 바베큐 그릴", n: "레드/블루/화이트의 핀스트라이프 식탁보 패턴, 두툼한 그릴 소시지 심볼", f: "바베큐 참나무 숯의 붉은 불씨(Ember)가 모서리에서 피어오르는 애니메이션", m: "미니 푸드트럭 휠이 굴러가는 바퀴자국 잔상, 셰프의 주걱(스파출라) 깃발", vk: "레트로 클래식, 스모크 바베큐, 활기참", vfx: "지속적인 스모크 그릴 연기 배출, 숯불 불똥 튀김 파티클", 
+        refs: [
+          { name: "Pinterest: 미국식 뒷마당 바베큐 캠핑 아트", url: "https://www.pinterest.co.kr/search/pins/?q=american%20backyard%20bbq%20party" },
+          { name: "ArtStation: 모닥불(Campfire) 화염 및 엠버 이펙트", url: "https://www.artstation.com/search?sort_by=relevance&query=campfire%20ember%20vfx" }
+        ] 
+      }
     },
     {
       month: 8,
-      kr: { theme: "🌺 광복의 달빛, 무궁화 정원", b: "기지 외벽을 무궁화 덩굴 장식이 감싸고 빛의 나비떼", n: "동양풍 화선지 질감, 은은한 먹선 무궁화", f: "전통 태극과 삼태극 마크 파동이 회전하는 프레임", m: "선비 도포 자락 바람결 잔상, 빛의 나비 플래그", vk: "우아함, 화이트/핑크, 민족의 자부심", vfx: "나비떼 흩날림, 신비한 펄 가루 일루전", p: "isometric+mobile+game+base+traditional+korean+palace+wall+covered+in+mugunghwa+hibiscus+vines+glowing+butterflies" },
-      jp: { theme: "🎇 오본 야시장과 불꽃 하나비", b: "여름 축제용 야타이(포장마차) 외형, 대형 금붕어 등불", n: "밤하늘 배경, 화려하게 피어오르는 불꽃", f: "액자 가장자리를 따라 불꽃놀이 도화선이 타들어가는 연출", m: "축제 가마(미코시) 묵직한 잔상, 물풍선 깃발", vk: "여름밤, 채도 높은 불꽃, 축제열기", vfx: "열기에 금붕어가 헤엄치는 듯한 아지랑이 왜곡, 섬광파", p: "isometric+mobile+game+base+japanese+summer+festival+yatai+food+stall+giant+glowing+goldfish+lantern+fireworks" },
-      us: { theme: "🚌 백 투 스쿨 틴에이지 로맨스", b: "하이틴 로맨스풍 거대한 노란색 하이스쿨 락커룸 타워", n: "구겨진 종이 질감 배경, 노란 연필 심볼", f: "마커펜 잉크 텍스처 타이포그래피 애니메이션", m: "스케이트보드 묘기 잔상, 주황 농구공 깃발", vk: "틴에이저 스웩, 크래프트, 옐로우/블랙", vfx: "카툰풍 땀방울 날림, 팝아트 코믹 북 이펙트", p: "isometric+mobile+game+base+retro+yellow+high+school+lockers+tower+back+to+school+theme+american+teenage" }
+      kr: { 
+        theme: "🌸 한여름 밤의 무궁화 정원", b: "은은한 달빛 아래, 기지 외벽을 무궁화 덩굴과 담쟁이가 감싼 온실", n: "동양풍 화선지(한지) 질감, 우아한 먹선 무궁화 심볼", f: "전통 부채가 펼쳐지며 우아한 바람을 일으키는 프레임", m: "선비의 도포 자락 흩날리듯 우아한 바람결 잔상, 빛의 나비 플래그", vk: "우아함, 화이트/핑크, 여백의 미", vfx: "형광 나비떼 흩날림, 신비한 펄(Pearl) 가루 일루전", 
+        refs: [
+          { name: "ArtStation: 동양풍 서원과 꽃 정원 배경", url: "https://www.artstation.com/search?sort_by=relevance&query=oriental%20garden%20palace" },
+          { name: "Pinterest: 발광 나비 매직 무리 파티클", url: "https://www.pinterest.co.kr/search/pins/?q=glowing%20butterfly%20vfx" }
+        ] 
+      },
+      jp: { 
+        theme: "🎐 여름바람 풍경(후우린) 찻집", b: "처마 끝에 수백 개의 유리 풍경(후우린)이 촘촘히 묶인 목조 전통 찻집", n: "시원한 대나무 짜임 바구니 패턴, 차가운 빙수(카키고리) 심볼", f: "투명한 유리 조각들이 아름답게 흔들리며 청아한 소리를 낼 듯한 애니메이션", m: "시원한 얼음장 위를 미끄러지는 듯한 스케이팅 잔상, 부채 깃발", vk: "투명 글래스, 산들바람, 시원함", vfx: "바람이 불 때마다 반짝이는 빛 굴절 셰이더, 차가운 냉기 이펙트", 
+        refs: [
+          { name: "Pinterest: 후우린(유리 풍경) 처마 장식 원화", url: "https://www.pinterest.co.kr/search/pins/?q=furin%20wind%20chime%20anime%20background" },
+          { name: "ArtStation: 얼음 빙수 디저트 카페 디자인", url: "https://www.artstation.com/search?sort_by=relevance&query=shaved%20ice%20store" }
+        ] 
+      },
+      us: { 
+        theme: "🚌 백 투 스쿨 레트로 캠퍼스", b: "하이틴 감성의 거대한 노란색 철제 락커룸과 스쿨버스 차고지 베이스", n: "구겨진 크래프트 종이(노트) 질감 배경, 노란 연필 심볼", f: "컬러풀한 형광 마커펜으로 테두리를 칠하는 낙서풍 보드 애니메이션", m: "스케이트보드 하프파이프 묘기를 부리는 스트릿 감성 잔상, 헤드폰 깃발", vk: "틴에이저 스웩, 크래프트, 옐로우/블랙", vfx: "카툰 하프톤 테마, 팝아트 코믹 북 먼지 튀김 이펙트 추가", 
+        refs: [
+          { name: "Pinterest: 미국 레트로 하이스쿨 락커룸", url: "https://www.pinterest.co.kr/search/pins/?q=retro%20high%20school%20lockers" },
+          { name: "ArtStation: 코믹북 스타일 하프톤 이펙트 연출", url: "https://www.artstation.com/search?sort_by=relevance&query=comic%20book%20halftone%20fx" }
+        ] 
+      }
     },
     {
       month: 9,
-      kr: { theme: "🌕 황금 보름달빛 한가위 추석", b: "둥근 보름달이 기지 위에 항상 떠있고 송편 오라 방출", n: "전통 조각보 복주머니 패턴 배경, 소나무와 달", f: "황금색 보름달빛 무리가 차오르는 호흡 애니메이션", m: "사물놀이 상모돌리기 리본춤 잔상, 옥토끼 절구 깃발", vk: "풍년 추수, 황금빛 달 아우라, 평온함", vfx: "황금 먼지 반짝임 산란, 스포트라이트 조명", p: "isometric+mobile+game+base+giant+golden+full+moon+glowing+over+korean+traditional+pavilion+chuseok+harvest" },
-      jp: { theme: "🍡 달맞이(츠키미) 은의 티하우스", b: "전통 툇마루 배경에 풍성한 억새풀과 당고 피라미드", n: "대나무 발장 질감 배경, 밤하늘을 보는 토끼", f: "가을 바람에 흔들리며 흩어지는 억새풀 갈대 프레임", m: "하얀 솜털 구름 토끼 점프 잔상, 삼색 당고 플래그", vk: "초가을 밤, 네이비/골드 매칭, 단아함", vfx: "살랑거리는 억새밭 사이 노란 반딧불 파티클", p: "isometric+mobile+game+base+japanese+tsukimi+moon+viewing+tea+house+silver+pampas+grass+dango+pyramid" },
-      us: { theme: "🍎 오텀 펌킨 스파이스 & 하베스트", b: "거대한 잭오랜턴 호박과 사과 박스로 축조된 전통 헛간", n: "원목 나무 판자 질감 배경, 윤기 나는 빨간 사과", f: "가을 단풍 낙엽들이 프레임을 빙글빙글 회전", m: "트랙터 묵직한 진동 잔상, 허수아비 깃발", vk: "오텀 멜로우, 번트 오렌지, 아메리칸 컨트리", vfx: "풍성한 단풍잎 흩날림, 석양의 붉은 노을빛 필터", p: "isometric+mobile+game+base+rustic+american+red+barn+giant+pumpkins+and+apple+crates+autumn+harvest+festival" }
+      kr: { 
+        theme: "🌕 보름달빛 가을 수확제(추석)", b: "둥글고 거대한 보름달 조형물이 기지 지붕에 떠있고 황금빛 스포트라이트", n: "다채로운 전통 조각보 직물 패턴 배경, 소나무와 달 심볼", f: "황금색 보름달빛 무리가 천천히 차오르는 호흡 템포 애니메이션", m: "전통 상모돌리기 리본춤 화려한 로프 액션 잔상, 절구 깃발", vk: "풍요로움, 황금빛 아우라, 평온함", vfx: "황금 먼지 반짝임 산란, 은은한 보름달 후광 효과", 
+        refs: [
+          { name: "ArtStation: 거대 방운 보름달 조명 환경", url: "https://www.artstation.com/search?sort_by=relevance&query=giant%20moon%20environment" },
+          { name: "Pinterest: 추석 달토끼 전통 소나무 문양", url: "https://www.pinterest.co.kr/search/pins/?q=korean%20chuseok%20moon%20rabbit" }
+        ] 
+      },
+      jp: { 
+        theme: "🌾 츠키미(달구경) 갈대밭 정자", b: "전통 툇마루 배경에 사람 키만한 거대 억새풀 숲, 달그림자 비치는 수면", n: "대나무 발(장막) 질감 패턴 배경, 고요한 달 토끼 심볼", f: "가을 밤바람에 흔들리며 쓸쓸히 흩어지는 억새풀 잎사귀 프레임", m: "하얀 솜털 구름 토끼 홉핑 발자국 잔상, 동그란 경단 꼬치 플래그", vk: "초가을 밤, 네이비/골드, 단아함", vfx: "살랑거리는 억새밭 사이 노랑 반딧불이(Firefly) 파티클", 
+        refs: [
+          { name: "Pinterest: 츠키미 갈대밭과 달구경 일러스트", url: "https://www.pinterest.co.kr/search/pins/?q=tsukimi%20moon%20viewing" },
+          { name: "ArtStation: 전통 다실과 스스키(억새) 3D 환경", url: "https://www.artstation.com/search?sort_by=relevance&query=japanese%20tea%20house%20night" }
+        ] 
+      },
+      us: { 
+        theme: "🍎 오텀 펌킨 팜 (가을 농장)", b: "거친 원목으로 지어진 레드 반(Barn) 헛간, 거대 호박과 사과 상자 바리케이드", n: "거칠게 다듬어진 원목 나무 판자 질감 배경, 윤기 나는 사과 심볼", f: "바삭거리는 가을 단풍(Maple leaf)이 프레임을 감싸며 소용돌이 기류 생성", m: "무거운 시골 트랙터 엔진 진동과 흙길 바퀴자국 잔상, 허수아비 깃발", vk: "오텀 멜로우, 번트 오렌지, 아메리칸 컨트리", vfx: "풍성한 단풍잎 흩날림, 석양의 붉은 노을빛 베이킹(Baking) 필터 효과", 
+        refs: [
+          { name: "ArtStation: 가을 호박 농장(레드 빈티지) 헛간", url: "https://www.artstation.com/search?sort_by=relevance&query=autumn%20barn%20pumpkin" },
+          { name: "Pinterest: 오텀 수확제 마켓 스터디", url: "https://www.pinterest.co.kr/search/pins/?q=autumn%20harvest%20festival%20market" }
+        ] 
+      }
     },
     {
       month: 10,
-      kr: { theme: "🖋️ 위대한 글씨, 한글 타이포그래피", b: "훈민정음 언해본 문자가 홀로그램처럼 떠도는 기지", n: "백지 화선지 여백 배경, 붉은색 붓글씨 낙관", f: "검은색 먹물이 번지며 매화꽃이 피어나는 애니매이션", m: "자음/모음 재조합 사이버네틱 무브 잔상, 거대 붓끝 플래그", vk: "흑백 대비효과, 잉크 드롭, 여백의 미학", vfx: "강렬한 붓놀림 먹물 스플래터 파티클, 수묵화 번짐", p: "isometric+mobile+game+base+floating+abstract+black+ink+calligraphy+letters+wrapping+around+modern+building+korean" },
-      jp: { theme: "🍁 명품 가을 단풍(모미지) 노천탕", b: "붉게 물든 거대 단풍나무 밑 뜨거운 김 모락모락 노천 온천", n: "온천수 위 붉은 단풍잎 배경, 히노키 목재 바가지", f: "뜨거운 수증기가 프레임 가장자리를 뒤덮는 애니메이션", m: "나막신 발걸음 이펙트 잔상, 단풍잎 흩날림 깃발", vk: "레드/골드 스펙트럼, 릴랙싱, 가을 숲속", vfx: "실시간 스팀 피어오르는 파티클, 입체적인 단풍 낙엽 스월링", p: "isometric+mobile+game+base+japanese+outdoor+hot+spring+onsen+surrounded+by+red+maple+trees+steaming+water" },
-      us: { theme: "🎃 스푸키 할로윈 유령의 집", b: "으스스하게 일그러진 보라빛 저택, 지붕에 박쥐떼가 날고 잭오랜턴 점멸", n: "거미줄 쳐진 돌담 배경, 기괴하게 웃는 잭오랜턴", f: "초록색 야광 액체 슬라임이 흘러내리는 애니메이션", m: "투명한 망토 유령 플로팅 잔상, 해골 깃발", vk: "할로윈 돌연변이 퍼플, 딥 오렌지/블랙, 호러", vfx: "퍼플/네온 그린 독기 아우라 연기, 박쥐 궤적", p: "isometric+mobile+game+base+spooky+halloween+haunted+mansion+glowing+carved+pumpkins+green+ectoplasm+slime" }
+      kr: { 
+        theme: "🖋️ 한글 사이버네틱 타이포그래피", b: "한글 자음 모음 문자들이 파란색 홀로그램 데이터처럼 떠도는 미래형 베이스", n: "디지털 스크린 글라이딩 매트릭스 패턴, 픽셀 붓글씨 심볼", f: "디지털 블록들이 해체되었다가 글씨로 다시 조립되는 글리치(Glitch) 테두리", m: "사이버네틱 무브를 보여주는 잔상 궤적, 짙은 파란 사이버 깃발", vk: "퓨처리스틱, 홀로그램, 조형의 미", vfx: "홀로그램 픽셀 분해 및 글리치 화면 왜곡 이펙트", 
+        refs: [
+          { name: "Pinterest: 사이버펑크 텍스트 홀로그램 모션그래픽", url: "https://www.pinterest.co.kr/search/pins/?q=cyberpunk%20hologram%20text%20UI" },
+          { name: "ArtStation: 글리치 효과(Glitch) 타이포그래피 아트", url: "https://www.artstation.com/search?sort_by=relevance&query=glitch%20typography%20effect" }
+        ] 
+      },
+      jp: { 
+        theme: "🍁 명품 모미지(단풍) 힐링파크", b: "붉게 물든 거대한 단풍나무 군락 아래 뜨거운 김이 모락모락 피어오르는 노천 온천 파크", n: "에메랄드빛 온천수 수면 위 단풍잎 배경, 히노키(편백) 바가지 심볼", f: "뜨거운 온천 수증기가 프레임 가장자리를 뽀얗게 서리처럼 뒤덮는 애니메이션", m: "나막신(게다)이 자갈밭을 딛는 듯한 발걸음 이펙트 잔상, 단풍잎 흩날림 깃발", vk: "레드/골드 스펙트럼, 릴랙싱, 가을 숲속", vfx: "실시간 스팀 모락모락 피어오르는 파티클, 입체적인 단풍 스월링 낙하", 
+        refs: [
+          { name: "Pinterest: 일본 노천 온천(Onsen) 단풍 3D 모델링", url: "https://www.pinterest.co.kr/search/pins/?q=japanese%20onsen%20hot%20spring%20autumn" },
+          { name: "ArtStation: 수증기 및 온천수 물리 재질 셰이더", url: "https://www.artstation.com/search?sort_by=relevance&query=hot%20spring%20water%20material" }
+        ] 
+      },
+      us: { 
+        theme: "🎃 할로윈 헌티드 멘션 (유령의 집)", b: "일그러진 형태의 보라색 낡은 저택, 지붕에 박쥐떼와 눈알이 굴러가는 잭오랜턴", n: "오래된 거미줄 쳐진 거친 돌담 배경, 기괴하게 웃는 박쥐 심볼", f: "초록색 야광 액체(슬라임/엑토플라즘)가 위에서 아래로 끈적하게 떨어지는 애니메이션", m: "발이 없는 투명한 유령 모드 호버링(Hovering) 잔상, 해골 바가지 깃발", vk: "독보적 퍼플, 딥 오렌지/블랙, 스푸키 테마", vfx: "퍼플/네온 그린 독기품은 아우라 연기, 흡혈 박쥐 비행궤적 스피드 파티클", 
+        refs: [
+          { name: "ArtStation: 할로윈 유령의 집 캐주얼 배경 아트", url: "https://www.artstation.com/search?sort_by=relevance&query=halloween%20haunted%20mansion%20game" },
+          { name: "Pinterest: 녹색 슬라임 & 퍼플 야광 이펙트 컴포넌트", url: "https://www.pinterest.co.kr/search/pins/?q=green%20slime%20glowing%20vfx" }
+        ] 
+      }
     },
     {
       month: 11,
-      kr: { theme: "🎯 수능 대박기원 오버패스", b: "기지 정문에 학업성취 부적 팝업, 지붕 위에 거대 찹쌀떡 탑 데코", n: "시험용 컴퓨터싸인펜 질감 배경, 100점 마크 심볼", f: "만점 과녁 중심에 야광 다트 화살이 꽂히는 루프", m: "정답콕콕 자이언트 포크 궤적 무빙, 네잎클로버 깃발", vk: "응원가, 열렬한 레드/화이트 조합, 행운부적", vfx: "골든 합격 광채 섬광, 별가루 축포 축하", p: "isometric+mobile+game+base+giant+lucky+yellow+talisman+stack+of+white+sticky+rice+cakes+korean+exam+success" },
-      jp: { theme: "👘 시치고산 종이 천학(오리가미)", b: "다채로운 치요가미 종이로만 접어 올린 거대 종이 성 건축물", n: "오리가미 질감 패턴 배경, 붉은 천학 심볼", f: "색종이 학 무리가 프레임 테두리를 비행하는 애니", m: "화려한 기모노 옷자락 잔상, 접선 종이 부채 깃발", vk: "종이예술 마스터피스, 비비드 스펙트럼", vfx: "빛 반사 각진 종이가루 흩날림, 프리즘 굴절", p: "isometric+mobile+game+base+magnificent+castle+made+entirely+of+colorful+origami+paper+folding+paper+cranes" },
-      us: { theme: "🦃 생스기빙 블랙프라이데이 크러시", b: "기지 중앙 거대한 칠면조 오븐구이 모형, 세일 홀로그램 스티커", n: "바코드 가격표 뒷배경 구겨진 질감, 과일 코르누코피아", f: "긴 쇼핑 영수증 열람지가 무한 출력되는 프레임", m: "카트레이싱 무서운 속도 돌진 잔상, 세일 플래그", vk: "광란의 마켓, 블랙&레드 자본주의, 아메리칸 러시", vfx: "그린 달러 지폐와 황금 동전 허리케인 스파클 효과", p: "isometric+mobile+game+base+giant+roasted+turkey+glowing+neon+sale+signs+black+friday+shopping+frenzy+thanksgiving" }
+      kr: { 
+        theme: "🎯 수능 대박기원 치얼스(Cheers)", b: "기지 정문에 대형 만점 목표 전광판, 지붕 위에 거대 찹쌀떡 탑 등 행운 디자인", n: "OMR 컴퓨터싸인펜 질감 배경, 정답 체크 V 마크 심볼", f: "만점 과녁판 중심에 레이저 다트 화살이 백발백중 꽂히는 무한 루프", m: "정답을 콕콕 찍으며 나아가는 포크 궤적 무빙, 행운의 네잎클로버 깃발", vk: "응원가, 열렬한 레드/화이트 조합, 포춘 럭키", vfx: "골든 성공 광채(샤이닝 스트라이크 섬광), 팡파르 폭죽 축하 파티클", 
+        refs: [
+          { name: "Pinterest: 시험 합격 기원 행운 아이콘 아트모음", url: "https://www.pinterest.co.kr/search/pins/?q=good%20luck%20charm%20game%20art" },
+          { name: "ArtStation: 과녁 적중 크리티컬 파티클 터짐 모션", url: "https://www.artstation.com/search?sort_by=relevance&query=critical%20hit%20bullseye%20vfx" }
+        ] 
+      },
+      jp: { 
+        theme: "👘 오리가미(종이접기) 크래프트 팰리스", b: "광택 나는 다채로운 색감의 색종이로 겹겹이 고이고이 접혀 올라간 거대 종이 건축물", n: "빳빳한 오리가미 종이 구김 질감 패턴 배경, 고고하게 접힌 천학 마크", f: "수많은 미니 색종이 학 무리가 프레임 테두리를 빙글빙글 선회 비행", m: "가벼운 종이 재질 특유의 팔랑거리는 옷자락 잔상, 접이식 종이 부채 깃발", vk: "페이퍼 크래프트, 비비드 다채색 스펙트럼", vfx: "빛을 반사하는 각진 종이 가루 흩날림, 빛이 프리즘 굴절 이펙트를 내며 산란", 
+        refs: [
+          { name: "ArtStation: 종이접기(Origami) 건축물 및 셰이더", url: "https://www.artstation.com/search?sort_by=relevance&query=origami%20paper%20castle" },
+          { name: "Pinterest: 페이퍼 크래프트 UI 텍스처 컬러링", url: "https://www.pinterest.co.kr/search/pins/?q=papercraft%20game%20art%20texture" }
+        ] 
+      },
+      us: { 
+        theme: "🛍️ 블랙프라이데이 쇼핑 크러시", b: "대형 마트 창고 모티브의 기지, 사방에서 대형 세일(SALE 50%, 70%) 홀로그램 난사", n: "흑백 바코드 가격표 뒷면에 쇼핑백 질감, 손수레(쇼핑카트) 심볼", f: "슈퍼마켓의 긴 쇼핑 영수증 열람지가 끝없이 스크롤 되어 내려오는 프레임", m: "레이싱 썰매 타듯 무서운 속도로 카트를 몰고 돌진하는 잔상, 노란색 세일 플래그", vk: "광란의 마켓퍼레이드, 블랙&옐로우, 아메리칸 러시", vfx: "초록색 지폐와 황금 동전들이 돈벼락처럼 회오리치는 강력한 스파클링 허리케인 효과", 
+        refs: [
+          { name: "Pinterest: 블랙프라이데이 세일 네온사인 배너 레퍼런스", url: "https://www.pinterest.co.kr/search/pins/?q=black%20friday%20sale%20neon%20banner" },
+          { name: "ArtStation: 황금 지폐 및 쇼핑 코인 토네이도(소용돌이) 이펙트", url: "https://www.artstation.com/search?sort_by=relevance&query=gold%20coins%20tornado%20vfx" }
+        ] 
+      }
     },
     {
       month: 12,
-      kr: { theme: "❄️ 첫눈 내리는 화이트 연말", b: "하얀 눈이 쌓인 모던형 서울 도심 옥상 테마, 따뜻한 펠릿 벽난로", n: "포근한 코바늘 니트 스웨터 텍스처, 빨간 벙어리 장갑", f: "서리 낀 유리창에 입김 호- 불어 크리스마스 별 그리는 애니", m: "눈덩이 던지기 강속구 전진 잔상, 털실 목도리 깃발", vk: "극강의 포근함, 코지(Cozy), 퓨어 화이트 매직", vfx: "실시간 환경 반응 입체 눈송이 낙하, 앰버 불빛 광원", p: "isometric+mobile+game+base+modern+city+rooftop+covered+in+thick+snow+warm+fireplace+glowing+through+glass" },
-      jp: { theme: "✨ 롯폰기 힐스 윈터 일루미네이션", b: "기지 전체를 수백만 개 라이트 블루 LED 전구로 촘촘하게 랩핑", n: "마이크로 LED 도트 발광 배경, 별빛 다이아 심볼", f: "네온 블루 전구들이 파도 타듯 차례로 스윕 점등", m: "레이저빔 쏘는 라인 잔상, 각진 크리스탈 얼음 깃발", vk: "사이버네틱 나이트, 네온 아이스블루, 글래머러스", vfx: "강렬한 광원의 블루 렌즈 플레어 남발, 샤프한 라이트 파장", p: "isometric+mobile+game+base+building+completely+covered+in+millions+of+blue+led+string+lights+illuminations" },
-      us: { theme: "🎅 웰컴 윈터 아메리칸 크리스마스", b: "산타 거대 목조 장난감 공장 기계, 컨베이어 선물 박스 포장", n: "두꺼운 빨간 벨벳 천조각 금치장 테두리 배경, 영롱한 황금 썰매종", f: "산타 요정 실루엣이 양옆에서 종을 흔드는 프레임", m: "루돌프 붉은 코 레이저 불빛 잔상, 캔디케인 양말 깃발", vk: "클래식 산타 레드, 홀리(Holy), 홀리데이 기프트", vfx: "별똥별 형태 서프라이즈 선물 낙하 이펙트, 마법가루 후행궤적", p: "isometric+mobile+game+base+giant+wooden+santa+toy+factory+conveyor+belt+with+presents+classic+american+christmas" }
+      kr: { 
+        theme: "❄️ 첫눈 내리는 로맨틱 윈터시티", b: "하얀 눈이 두껍게 소복이 쌓인 모던형 도심 옥상 루프탑, 유리 너머 따뜻한 장작 난로", n: "포근하고 촘촘한 코바늘 겨울 스웨터 텍스처, 빨간색 털 벙어리 장갑 심볼", f: "마치 서리 낀 겨울 창문에 핫 입김을 불어 손가락으로 별을 그린 듯한 따뜻한 애니", m: "하얀 눈덩이 뭉치를 던지는 눈싸움 스로잉 모션 전진 잔상, 목도리 플래그", vk: "극강의 포근함, 코지(Cozy), 모던 윈터 화이트", vfx: "실시간 환경 반응 입체 육각 눈송이가 부드럽게 낙하, 따스한 앰버 불빛 광원", 
+        refs: [
+          { name: "ArtStation: 눈 덮인 도심 옥상 겨울 아늑함 컨셉 아트", url: "https://www.artstation.com/search?sort_by=relevance&query=snowy%20city%20rooftop%20winter" },
+          { name: "Pinterest: 코바늘 니트(Knit) 재질의 소프트 UI 버튼", url: "https://www.pinterest.co.kr/search/pins/?q=knit%20sweater%20texture%20game" }
+        ] 
+      },
+      jp: { 
+        theme: "✨ 미드나잇 윈터 라이트 일루미네이션", b: "기지 건물 전체를 수십만 개의 아이스 블루 마이크로 LED 전구로 촘촘히 랩핑한 야경 타워", n: "마이크로 LED 도트들이 발광하는 테크노 배경, 수면처럼 빛나는 다이아 심볼", f: "네온 블루 꼬마 전구들이 EDM 음악 비트에 맞춰 파도 타듯 촤르륵 점등되는 프레임", m: "레이저빔(옵틱스)을 쏘며 순식간에 이동하는 사이버네틱 고속 잔상, 크리스탈 엣지 깃발", vk: "사이버네틱 나이트 뷰, 네온 아이스블루, 시티팝", vfx: "강렬한 광원과 렌즈 플레어(Lens Flare) 남발, 시신경을 자극하는 샤프한 라이트웨이브 파장", 
+        refs: [
+          { name: "Pinterest: 겨울 푸른빛 LED 일루미네이션 레퍼런스", url: "https://www.pinterest.co.kr/search/pins/?q=illumination%20blue%20led%20winter" },
+          { name: "ArtStation: 글래스 & 크리스탈 LED 발광 셰이더", url: "https://www.artstation.com/search?sort_by=relevance&query=blue%20led%20fairy%20lights%20vfx" }
+        ] 
+      },
+      us: { 
+        theme: "🎁 기프트 언박싱 (연말 선물 팩토리)", b: "거대 장난감 공장 기계가 컨베이어 벨트를 돌리며 초대형 레드 리본 선물 박스를 무한 포장", n: "부들부들한 붉은 벨벳 천조각과 우아한 금치장 테두리 배경, 영롱한 황금 방울 심볼", f: "깜찍한 장난감 요정(엘프 아님, 곰돌이 등) 실루엣이 양옆에서 종을 흔드는 귀여운 프레임", m: "반짝이는 레드 레이저 눈빔 불빛 잔상, 줄무늬 캔디스틱 장식 깃발", vk: "홀리데이 기프트, 화려한 레드/골드, 서프라이즈 박스", vfx: "하늘에서 아름다운 별똥별처럼 쏟아지는 작은 폭죽 선물상자 낙하, 마법 잔가루 후행 궤적", 
+        refs: [
+          { name: "ArtStation: 거대한 토이 기프트 팩토리 3D 배경", url: "https://www.artstation.com/search?sort_by=relevance&query=toy%20gift%20factory%20concept" },
+          { name: "Pinterest: 연말연시 윈터 홀리데이 레드/골드 패턴", url: "https://www.pinterest.co.kr/search/pins/?q=holiday%20gift%20patterns%20red%20gold" }
+        ] 
+      }
     }
   ];
 
@@ -373,18 +568,14 @@
             ${d[c].theme.includes(':') ? d[c].theme.split(':')[1].trim() : d[c].theme}
           </div>
           
-          <div class="img-wrapper" id="img-wrap-${d.month}-${c}">
-            <div class="loading-text">
-              <div class="spinner"></div>
-              <span>AI 이미지 생성중...</span>
-            </div>
-            <img src="https://image.pollinations.ai/prompt/${d[c].p}?width=400&height=225&nologo=true&seed=${Math.floor(Math.random()*100)}" 
-                 alt="Sample Concept" 
-                 class="sample-img" 
-                 loading="lazy"
-                 onload="this.classList.add('loaded')"
-                 onerror="this.style.display='none'; this.previousElementSibling.innerHTML='<span>이미지 생성 서버 지연</span>'">
-            <div class="img-overlay">AI Concept Art</div>
+          <div class="ref-links">
+            <div class="ref-links-title">🎨 영감 이미지 레퍼런스(Reference)</div>
+            ${d[c].refs.map(ref => `
+              <div class="ref-link-item">
+                <span class="link-icon">🔗</span>
+                <a href="${ref.url}" target="_blank" rel="noopener noreferrer">${ref.name}</a>
+              </div>
+            `).join('')}
           </div>
 
           <ul class="content-list">
